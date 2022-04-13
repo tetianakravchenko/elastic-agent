@@ -58,7 +58,7 @@ type source interface {
 	Stop() error
 }
 
-// newLocal return a agent managed by local configuration.
+// newLocal return an agent managed by local configuration.
 func newLocal(
 	ctx context.Context,
 	log *logger.Logger,
@@ -149,7 +149,7 @@ func newLocal(
 
 	localApplication.source = cfgSource
 
-	// create a upgrader to use in local mode
+	// create an upgrader to use in local mode
 	upgrader := upgrade.NewUpgrader(
 		agentInfo,
 		cfg.Settings.DownloadConfig,

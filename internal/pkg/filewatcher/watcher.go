@@ -197,7 +197,7 @@ type record struct {
 }
 
 // ContentComparer uses the last modified date of the file and a checksum of the content of the file
-// to know if the files are differents and must be processed again.
+// to know if the files are different and must be processed again.
 func ContentComparer(file string, r interface{}) (bool, interface{}, error) {
 	stat, err := os.Stat(file)
 	if err != nil {
@@ -238,7 +238,7 @@ func ContentComparer(file string, r interface{}) (bool, interface{}, error) {
 }
 
 func checksum(file string) ([]byte, error) {
-	// Mod time was changed on on the file, now lets looks at the content of the file.
+	// Mod time was changed on the file, now lets looks at the content of the file.
 	f, err := os.Open(file)
 	if err != nil {
 		return nil, errors.New(err,

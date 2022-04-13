@@ -12,6 +12,8 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"runtime"
+	"runtime/debug"
 	"syscall"
 
 	"github.com/spf13/cobra"
@@ -99,6 +101,20 @@ func run(streams *cli.IOStreams, override cfgOverrider) error {
 		return err
 	}
 
+	// Catch panic and log it
+	defer func() {
+		if r := recover(); r != nil {
+			buff := make([]byte, 1)
+
+			runtime.Stack(buff, false)
+			fmt.Println("=====================================================================")
+			fmt.Println(string(debug.Stack()))
+			fmt.Println("=====================================================================")
+			logger.With("stack_trace", string(debug.Stack())).Panicf("recovered from panic: %v", r)
+		}
+	}()
+
+	panic("testing catch panic")
 	cfg, err = tryDelayEnroll(ctx, logger, cfg, override)
 	if err != nil {
 		err = errors.New(err, "failed to perform delayed enrollment")

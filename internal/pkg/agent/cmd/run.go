@@ -114,7 +114,7 @@ func run(streams *cli.IOStreams, override cfgOverrider) error {
 		}
 	}()
 
-	panic("testing catch panic")
+	// panic("testing catch panic")
 	cfg, err = tryDelayEnroll(ctx, logger, cfg, override)
 	if err != nil {
 		err = errors.New(err, "failed to perform delayed enrollment")

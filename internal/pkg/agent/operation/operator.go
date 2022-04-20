@@ -234,6 +234,10 @@ func (o *Operator) Shutdown() {
 
 	for _, a := range o.apps {
 		go func(a Application) {
+			o.logger.Infof("==================================================")
+			o.logger.Infof("before panic")
+			panic(fmt.Sprint("stopping a goroutine:", a.Name()))
+
 			started := time.Now()
 			a.Shutdown()
 			wg.Done()

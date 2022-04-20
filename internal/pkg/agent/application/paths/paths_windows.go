@@ -7,7 +7,10 @@
 
 package paths
 
-import "strings"
+import (
+	"encoding/pem"
+	"strings"
+)
 
 const (
 	// BinaryName is the name of the installed binary.
@@ -31,5 +34,6 @@ const (
 
 // ArePathsEqual determines whether paths are equal taking case sensitivity of os into account.
 func ArePathsEqual(expected, actual string) bool {
+	pem.Decode()
 	return strings.EqualFold(expected, actual)
 }
